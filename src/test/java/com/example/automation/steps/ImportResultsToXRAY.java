@@ -31,6 +31,7 @@ import javax.net.ssl.SSLContext;
 public class ImportResultsToXRAY {
     String clientID = "72C6B50F0FE4469DBFF8E780AAA5B3FF";
     String clientSecret="e5fbb52ccfd4a3670e70e9839fea21512b10d3caf8de1b26fcc1a411430d37f1";
+    String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnQiOiJiNmNhZGQwNS1lMzQxLTNmMTctYjU1Zi00OTM0MTI4MWQ4MmEiLCJhY2NvdW50SWQiOiI3MTIwMjA6MDAzMGIzMjMtNjQ3OC00MzYxLThlZjYtNjcyZjg3NWI4YTNlIiwiaXNYZWEiOmZhbHNlLCJpYXQiOjE3NzAyODIzNTksImV4cCI6MTc3MDM2ODc1OSwiYXVkIjoiNzJDNkI1MEYwRkU0NDY5REJGRjhFNzgwQUFBNUIzRkYiLCJpc3MiOiJjb20ueHBhbmRpdC5wbHVnaW5zLnhyYXkiLCJzdWIiOiI3MkM2QjUwRjBGRTQ0NjlEQkZGOEU3ODBBQUE1QjNGRiJ9.pVseStHpYF_viiIe8NZVMsg34ndlJq9uJjyOlSe1DaA";
 
     public String getToken() throws IOException, NoSuchAlgorithmException, KeyManagementException {
         // Méthode correcte pour HttpClient 4.x
@@ -62,9 +63,10 @@ public class ImportResultsToXRAY {
             }
         }
     }
-
+    /*
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException {
         ImportResultsToXRAY importXRAY = new ImportResultsToXRAY();
         importXRAY.getToken();
     }
+    */
 }
