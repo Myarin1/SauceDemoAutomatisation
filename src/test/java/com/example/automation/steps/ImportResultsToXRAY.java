@@ -69,4 +69,60 @@ public class ImportResultsToXRAY {
         importXRAY.getToken();
     }
     */
+
+    public void solution2() throws IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException, InterruptedException {
+        HttpURLConnection conn;
+        URL url;
+        String result;
+        String  URL ="https://xray.cloud.getxray.app/api/v1/import/execution/cucumber";
+        //Call the openConnection method on the URL to create a connection object
+        url = new URL(URL);
+        conn = (HttpURLConnection) url.openConnection();
+
+        //Various settings of HttpURLConnection
+        //Set HTTP method to POST
+        conn.setRequestMethod("POST");
+        //Allow body submission of request
+        conn.setDoInput(true);
+        //Allow body reception of response
+        conn.setDoOutput(true);
+        //Specify Json format
+        conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+        conn.setRequestProperty("Authorization", "Bearer " + token);
+// 2.Establish a connection
+        conn.connect();
+        // 3.Write to request and body
+        //Get OutputStream from HttpURLConnection and write json string
+        Thread.sleep(10000);
+        PrintStream ps = new PrintStream(conn.getOutputStream());
+
+        Path filePath = Path.of(System.getProperty("user.dir")+"/target/cucumber.json");
+        String content = Files.readString(filePath);
+        System.out.println("mon fichier  = "+content);
+        ps.print(content);
+        ps.close();
+
+        // 4.Receive a response
+        //HttpStatusCode 200 is returned at the end of normal operation
+        if (conn.getResponseCode() != 200) {
+            //Error handling
+        }
+        //Get InputStream from HttpURLConnection and read
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+        }
+        result = sb.toString();
+        // 5.Disconnect
+        conn.disconnect();
+        //Return the result to the caller
+        System.out.println(result);
+    }
+
+    public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException, KeyStoreException, InterruptedException {
+        ImportResultsToXRAY importXRAY = new ImportResultsToXRAY();
+        importXRAY.solution2();
+    }
 }
