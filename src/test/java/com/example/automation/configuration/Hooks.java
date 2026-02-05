@@ -1,6 +1,7 @@
 
 package com.example.automation.configuration;
 
+import com.example.automation.steps.ImportResultsToXRAY;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
