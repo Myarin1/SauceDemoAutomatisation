@@ -6,6 +6,21 @@ pipeline {
         }
 
     stages {
+		
+		stage('Import') {
+			steps {
+				dir('C:/dev/BackupMisc/src/test/resources/features2') {
+					bat '''
+					curl -H "Content-Type: application/json" ^
+					-X GET ^
+					-H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnQiOiJiNmNhZGQwNS1lMzQxLTNmMTctYjU1Zi00OTM0MTI4MWQ4MmEiLCJhY2NvdW50SWQiOiI3MTIwMjA6MDAzMGIzMjMtNjQ3OC00MzYxLThlZjYtNjcyZjg3NWI4YTNlIiwiaXNYZWEiOmZhbHNlLCJpYXQiOjE3NzA2MzU2OTIsImV4cCI6MTc3MDcyMjA5MiwiYXVkIjoiNzJDNkI1MEYwRkU0NDY5REJGRjhFNzgwQUFBNUIzRkYiLCJpc3MiOiJjb20ueHBhbmRpdC5wbHVnaW5zLnhyYXkiLCJzdWIiOiI3MkM2QjUwRjBGRTQ0NjlEQkZGOEU3ODBBQUE1QjNGRiJ9.GNQNaNDURgZK0RqNFwySykJyLM_kqVs7X5n7TtZpoBs" ^
+					"https://xray.cloud.getxray.app/api/v1/export/cucumber?keys=POEI2-844" ^
+					-o xray_tests.zip
+					powershell -Command "Expand-Archive -Force xray_tests.zip xray_cucumber"
+					'''
+					}
+			}
+		}
 
         stage('Checkout') {
             steps {
@@ -16,6 +31,7 @@ pipeline {
 
         stage('Build & Test') {
             steps {
+				
                 echo 'Execution des tests Cucumber via Maven...'
                 dir('C:/dev/BackupMisc') {
                     bat 'mvn clean test -Dselenium.browser=%SELENIUM_BROWSER%'

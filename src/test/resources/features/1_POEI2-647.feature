@@ -1,6 +1,6 @@
 Feature: Tests Sauce_Demo
 
-	@POEI2-647 @POEI2-701 @CC
+	#@POEI2-647 @POEI2-701 @CC
 	Scenario Outline: Connexion échouée avec un mot de passe incorrect
 		Given l'utilisateur est sur la page de connexion
 		     When il saisit le username "<username>" et le mot de passe "<password>"

@@ -6,7 +6,7 @@ Feature: Ajout d'un produit au panier
 		    When il saisit le username "standard_user" et le mot de passe "secret_sauce"
 		    Then l'utilisateur est sur la Home page
 
-	@POEI2-652 @POEI2-701 @CC
+	#@POEI2-652 @POEI2-701 @CC
 	Scenario: Ajout d'un produit au panier
 		Given l'utilisateur est sur la Home page
 		    When il clique sur le bouton du produit "sauce labs backpack"
