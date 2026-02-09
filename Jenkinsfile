@@ -30,8 +30,9 @@ pipeline {
              --data @"target/cucumber.json" ^
              https://xray.cloud.getxray.app/api/v1/import/execution/cucumber
         '''
-    }
-}
+		}
+	}
+
 
     post {
 
