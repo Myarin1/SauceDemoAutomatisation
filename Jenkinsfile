@@ -27,7 +27,7 @@ pipeline {
         curl -H "Content-Type: application/json" ^
              -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." ^
              -X POST ^
-             --data @"C:\dev\BackupMisc\target\cucumber.json" ^
+             --data @"C:/ev/BackupMisc/target/cucumber.json" ^
              https://xray.cloud.getxray.app/api/v1/import/execution/cucumber
         '''
 		}
