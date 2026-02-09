@@ -7,7 +7,10 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,9 +18,11 @@ import java.util.Map;
 public class DriverFactory {
     private static WebDriver driver;
 
-    public static WebDriver getDriver(String browser) {
+    public static WebDriver getDriver() {
         if (driver == null) {
-            if (browser=="CHROME"){
+            //String browser = System.getProperty("selenium.browser");
+            String browser = "CHROME";
+            if (browser=="CHROME") {
                 // Ensuite, passe ces options à ton WebDriver
                 ChromeOptions options = new ChromeOptions();
                 Map<String, Object> prefs = new HashMap<>();
@@ -27,9 +32,14 @@ public class DriverFactory {
                 prefs.put("profile.default_content_settings.popups", 0);
                 options.addArguments("--incognito");
                 options.setExperimentalOption("prefs", prefs);
-                driver = new ChromeDriver(options);
+                try {
+                    driver = new RemoteWebDriver(new URL("http://admin:admin@172.16.14.73:4444/wd/hub"), options);
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
+                }
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-            } else if (browser=="FIREFOX") {
+            }
+            else if (browser=="FIREFOX") {
                 // Ensuite, passe ces options à ton WebDriver
                 FirefoxOptions options = new FirefoxOptions();
                 Map<String, Object> prefs = new HashMap<>();
@@ -39,9 +49,14 @@ public class DriverFactory {
                 prefs.put("profile.default_content_settings.popups", 0);
                 options.addArguments("--incognito");
                 //options.setExperimentalOption("prefs", prefs);
-                driver = new FirefoxDriver(options);
+                try {
+                    driver = new RemoteWebDriver(new URL("http://172.16.14.73:4444/wd/hub"), options);
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
+                }
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-            } else if (browser=="EDGE") {
+            }
+            else if (browser=="EDGE") {
                 // Ensuite, passe ces options à ton WebDriver
                 EdgeOptions options = new EdgeOptions();
                 Map<String, Object> prefs = new HashMap<>();
@@ -51,13 +66,16 @@ public class DriverFactory {
                 prefs.put("profile.default_content_settings.popups", 0);
                 options.addArguments("--incognito");
                 options.setExperimentalOption("prefs", prefs);
-                driver = new EdgeDriver(options);
+                try {
+                    driver = new RemoteWebDriver(new URL("http://172.16.14.73:4444/wd/hub"), options);
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e);
+                }
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
             }
         }
         return driver;
-    }
-
+ }
     public static void quitDriver() {
         if (driver != null) {
             driver.quit();
