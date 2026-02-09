@@ -33,7 +33,7 @@ pipeline {
 		}
 	}
 
-
+	}
     post {
 
         success {
@@ -44,5 +44,4 @@ pipeline {
             echo 'Des tests ont échoué ❌'
         }
     }
-}
 }
