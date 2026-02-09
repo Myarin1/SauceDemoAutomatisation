@@ -36,10 +36,12 @@ public class Hooks {
         DriverFactory.quitDriver();
     }
 
+    /*
     @AfterClass
     public static void exportJSON() throws IOException, NoSuchAlgorithmException, KeyStoreException, InterruptedException, KeyManagementException {
         System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         ImportResultsToXRAY importXRAY = new ImportResultsToXRAY();
         importXRAY.solution2();
     }
+    */
 }
