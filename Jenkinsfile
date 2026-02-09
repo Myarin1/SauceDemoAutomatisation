@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    parameters{
+            string(name: 'SELENIUM_BROWSER', defaultValue: 'CHROME')
+        }
+
     stages {
 
         stage('Checkout') {
@@ -14,7 +18,7 @@ pipeline {
             steps {
                 echo 'Execution des tests Cucumber via Maven...'
                 dir('C:/dev/BackupMisc') {
-                    bat 'mvn clean test'
+                    bat 'mvn clean test -Dselenium.browser=%SELENIUM_BROWSER%'
                     }
 
             }

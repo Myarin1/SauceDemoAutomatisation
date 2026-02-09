@@ -3,6 +3,10 @@ package com.example.automation.configuration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -11,19 +15,45 @@ import java.util.Map;
 public class DriverFactory {
     private static WebDriver driver;
 
-    public static WebDriver getDriver() {
+    public static WebDriver getDriver(String browser) {
         if (driver == null) {
-            // Ensuite, passe ces options à ton WebDriver
-            ChromeOptions options = new ChromeOptions();
-            Map<String, Object> prefs = new HashMap<>();
-            prefs.put("profile.default_content_setting_values.notifications", 2);
-            prefs.put("credentials_enable_service", false);
-            prefs.put("profile.password_manager_enabled", false);
-            prefs.put("profile.default_content_settings.popups", 0);
-            options.addArguments("--incognito");
-            options.setExperimentalOption("prefs", prefs);
-            driver = new ChromeDriver(options);
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+            if (browser=="CHROME"){
+                // Ensuite, passe ces options à ton WebDriver
+                ChromeOptions options = new ChromeOptions();
+                Map<String, Object> prefs = new HashMap<>();
+                prefs.put("profile.default_content_setting_values.notifications", 2);
+                prefs.put("credentials_enable_service", false);
+                prefs.put("profile.password_manager_enabled", false);
+                prefs.put("profile.default_content_settings.popups", 0);
+                options.addArguments("--incognito");
+                options.setExperimentalOption("prefs", prefs);
+                driver = new ChromeDriver(options);
+                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+            } else if (browser=="FIREFOX") {
+                // Ensuite, passe ces options à ton WebDriver
+                FirefoxOptions options = new FirefoxOptions();
+                Map<String, Object> prefs = new HashMap<>();
+                prefs.put("profile.default_content_setting_values.notifications", 2);
+                prefs.put("credentials_enable_service", false);
+                prefs.put("profile.password_manager_enabled", false);
+                prefs.put("profile.default_content_settings.popups", 0);
+                options.addArguments("--incognito");
+                //options.setExperimentalOption("prefs", prefs);
+                driver = new FirefoxDriver(options);
+                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+            } else if (browser=="EDGE") {
+                // Ensuite, passe ces options à ton WebDriver
+                EdgeOptions options = new EdgeOptions();
+                Map<String, Object> prefs = new HashMap<>();
+                prefs.put("profile.default_content_setting_values.notifications", 2);
+                prefs.put("credentials_enable_service", false);
+                prefs.put("profile.password_manager_enabled", false);
+                prefs.put("profile.default_content_settings.popups", 0);
+                options.addArguments("--incognito");
+                options.setExperimentalOption("prefs", prefs);
+                driver = new EdgeDriver(options);
+                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+            }
         }
         return driver;
     }
