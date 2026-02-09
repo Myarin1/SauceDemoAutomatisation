@@ -13,7 +13,7 @@ pipeline {
         stage('Build & Test') {
             steps {
                 echo 'Execution des tests Cucumber via Maven...'
-                dir('C:/dev/Backup_Git/SauceDemoAutomatisation') {
+                dir('C:/ev/BackupMisc/target/cucumber.json') {
                     bat 'mvn clean test'
                     }
 
