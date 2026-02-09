@@ -63,12 +63,12 @@ public class ImportResultsToXRAY {
             }
         }
     }
-/*
+
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException {
         ImportResultsToXRAY importXRAY = new ImportResultsToXRAY();
         importXRAY.getToken();
     }
-*/
+
 
     public void solution2() throws IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException, InterruptedException {
         HttpURLConnection conn;
@@ -120,11 +120,11 @@ public class ImportResultsToXRAY {
         //Return the result to the caller
         System.out.println(result);
     }
-
+    /*
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException, KeyStoreException, InterruptedException {
         ImportResultsToXRAY importXRAY = new ImportResultsToXRAY();
         importXRAY.solution2();
     }
-
+    */
 
 }
