@@ -19,12 +19,19 @@ pipeline {
 
             }
         }
-        stage('Export results to XRAY'){
-            steps {
-                echo('Export des .json vers XRAY')
-                curl -H "Content-Type: application/json" -X POST -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnQiOiJiNmNhZGQwNS1lMzQxLTNmMTctYjU1Zi00OTM0MTI4MWQ4MmEiLCJhY2NvdW50SWQiOiI3MTIwMjA6MDAzMGIzMjMtNjQ3OC00MzYxLThlZjYtNjcyZjg3NWI4YTNlIiwiaXNYZWEiOmZhbHNlLCJpYXQiOjE3NzA2MjcwMjYsImV4cCI6MTc3MDcxMzQyNiwiYXVkIjoiNzJDNkI1MEYwRkU0NDY5REJGRjhFNzgwQUFBNUIzRkYiLCJpc3MiOiJjb20ueHBhbmRpdC5wbHVnaW5zLnhyYXkiLCJzdWIiOiI3MkM2QjUwRjBGRTQ0NjlEQkZGOEU3ODBBQUE1QjNGRiJ9.3LRLZS9HhxLWxX0oy4pCYmBW1naSuIMMPs9t4NzDkts"  --data @"target/cucumber.json" https://xray.cloud.getxray.app/api/v1/import/execution/cucumber
-            }
-	}
+        stage('Export results to XRAY') {
+    steps {
+        echo 'Export des .json vers XRAY'
+
+        bat '''
+        curl -H "Content-Type: application/json" ^
+             -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." ^
+             -X POST ^
+             --data @"target/cucumber.json" ^
+             https://xray.cloud.getxray.app/api/v1/import/execution/cucumber
+        '''
+    }
+}
 
     post {
 
