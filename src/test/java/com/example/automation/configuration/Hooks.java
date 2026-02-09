@@ -17,16 +17,15 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 
 public class Hooks {
+    String browser = System.getProperty("selenium.browser");
     @Before
     public void setUp() {
-        String browser = System.getProperty("selenium.browser");
         DriverFactory.getDriver(browser);
     }
 
     @After
     public void tearDown(Scenario scenario) throws IOException {
         if (scenario.isFailed()) {
-            String browser = System.getProperty("selenium.browser");
             TakesScreenshot ts = (TakesScreenshot) DriverFactory.getDriver(browser);
             File source = ts.getScreenshotAs(OutputType.FILE);
             File destination = new File("target/screenshots/capture_" + scenario.getName() + ".png");
