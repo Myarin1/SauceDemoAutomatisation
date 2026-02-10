@@ -9,7 +9,7 @@ pipeline {
 		
 		stage('Import') {
 			steps {
-				dir('C:/dev/BackupMisc/src/test/resources/features2') {
+				dir('C:/dev/Jenkins/workspace/POEI2026/PomPipeline/src/test/resources/features') {
 					bat '''
 					curl -H "Content-Type: application/json" ^
 					-X GET ^
@@ -33,7 +33,7 @@ pipeline {
             steps {
 				
                 echo 'Execution des tests Cucumber via Maven...'
-                dir('C:/dev/BackupMisc') {
+                dir('C:/dev/Jenkins/workspace/POEI2026/PomPipeline') {
                     bat 'mvn clean test -Dselenium.browser=%SELENIUM_BROWSER%'
                     }
 
